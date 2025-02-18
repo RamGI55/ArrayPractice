@@ -15,7 +15,9 @@ ATestActor::ATestActor()
 void ATestActor::BeginPlay()
 {
 	Super::BeginPlay();
-	InitializeArray(); 
+	/*InitializeArray();
+	StringArray(); */
+	HeapSorting(); 
 
 	
 }
@@ -29,7 +31,55 @@ void ATestActor::InitializeArray()
 		ArrayContent += FString::FromInt(Num) + TEXT(" ");
 	}
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, ArrayContent);
+
 }
+
+void ATestActor::StringArray()
+{
+	StrArr.Add(TEXT("Hello"));
+	StrArr.Emplace(TEXT("World!")); 
+
+	FString StringContent;
+	for (auto& Str : StrArr)
+	{
+		StringContent += Str; 
+		StringContent += TEXT(" ");
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, StringContent);
+
+}
+
+// the function show how heap sorting works. 
+void ATestActor::HeapSorting()
+{
+	for (int32 Val = 10; Val != 0; --Val)
+	{
+		HeapArr.Add(Val);
+	}
+	// Heap sorting the array. 
+	HeapArr.Heapify();
+	
+	// Push the 5 on the tree 
+	HeapArr.HeapPush(5);
+
+	// Pop the Top Node of the tree 
+	int32 TopNode;
+	HeapArr.HeapPop(TopNode);
+	HeapArr.HeapPopDiscard();
+
+
+	HeapArr.HeapTop(); 
+	// Print the sorting result to the debug print string. 
+	FString ArrayCont;
+	for (int32 Val : HeapArr)
+	{
+		ArrayCont += FString::FromInt(Val) + TEXT(" ");
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, ArrayCont);
+}
+
+
+
 
 
 

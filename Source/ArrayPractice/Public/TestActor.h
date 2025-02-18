@@ -13,6 +13,8 @@ public:
 	// Sets default values for this actor's properties
 	ATestActor();
 	TArray<int32> IntArray;
+	TArray<FString> StrArr; 
+	TArray<int32> HeapArr;
 
 protected:
 	// Called when the game starts or when spawned
@@ -21,4 +23,7 @@ protected:
 private: 
 	// Initialize the array in the constructor
 	void InitializeArray();
+	void StringArray(); 
+	void HeapSorting(); 
+
 };
